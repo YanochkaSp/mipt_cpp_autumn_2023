@@ -135,7 +135,7 @@ std::string StrToCode (const std::string& str) // функция, возвращ
     return new_str;
 }
 
-void isSimilar (std::string& str1, std::string& str2)
+int isSimilar (std::string str1, std::string str2)
 {
     std::string code1 = StrToCode(str1);
     std::string code2 = StrToCode(str2);
@@ -143,9 +143,11 @@ void isSimilar (std::string& str1, std::string& str2)
     if (code1 == code2)
     {
         printf("The strings are phonetically similar");
+        return 1;
     }
     else
     {
         printf("The strings are not phonetically similar");
+        return -1;
     }
 }

@@ -9,7 +9,7 @@ std::string Replacer (std::string& new_str);
 
 std::string StrToCode (const std::string& str); // функция, возвращающая строку
 
-void isSimilar (std::string& str1, std::string& str2);
+int isSimilar (std::string str1, std::string str2);
 
 std::string VowelsDeleter (std::string& new_str, std::string& temp_str); // удаление гласных
 

@@ -15,13 +15,14 @@ class TestPhoneticArg : public ::testing::Test
     {
         std::cout << "Tear down" << std::endl;
     }
-}
+};
 
 TEST_F(TestPhoneticArg, isSimilar)
 {
     {
-        std::string expected{"The strings are not phonetically similar"};
-        ASSERT_EQ(expected, isSimilar("kjbkr", "wt"));
+        int expected{-1};
+        int received = isSimilar("kjbkr", "wt");
+        ASSERT_EQ(expected, received);
     }
 }
 
