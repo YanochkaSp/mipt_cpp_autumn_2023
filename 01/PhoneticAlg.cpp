@@ -1,52 +1,53 @@
 #include "PhoneticAlg.h"
 
+void ReplaceChars (std::string& new_str, char from, char to)
+{
+    std::replace(new_str.begin(), new_str.end(), from, to);
+}
+
 std::string Replacer (std::string& new_str)
 {
-    std::replace(new_str.begin(), new_str.end(), 'b', '1');
-    std::replace(new_str.begin(), new_str.end(), 'f', '1');
-    std::replace(new_str.begin(), new_str.end(), 'p', '1');
-    std::replace(new_str.begin(), new_str.end(), 'v', '1');
+    ReplaceChars(new_str, 'b', '1');
+    ReplaceChars(new_str, 'f', '1');
+    ReplaceChars(new_str, 'p', '1');
+    ReplaceChars(new_str, 'v', '1');
 
-    std::replace(new_str.begin(), new_str.end(), 'c', '2');
-    std::replace(new_str.begin(), new_str.end(), 'g', '2');
-    std::replace(new_str.begin(), new_str.end(), 'j', '2');
-    std::replace(new_str.begin(), new_str.end(), 'k', '2');
-    std::replace(new_str.begin(), new_str.end(), 'q', '2');
-    std::replace(new_str.begin(), new_str.end(), 's', '2');
-    std::replace(new_str.begin(), new_str.end(), 'x', '2');
-    std::replace(new_str.begin(), new_str.end(), 'z', '2');
+    ReplaceChars(new_str, 'c', '2');
+    ReplaceChars(new_str, 'g', '2');
+    ReplaceChars(new_str, 'j', '2');
+    ReplaceChars(new_str, 'k', '2');
+    ReplaceChars(new_str, 'q', '2');
+    ReplaceChars(new_str, 's', '2');
+    ReplaceChars(new_str, 'x', '2');
+    ReplaceChars(new_str, 'z', '2');
 
-    std::replace(new_str.begin(), new_str.end(), 'd', '3');
-    std::replace(new_str.begin(), new_str.end(), 't', '3');
+    ReplaceChars(new_str, 'd', '3');
+    ReplaceChars(new_str, 't', '3');
 
-    std::replace(new_str.begin(), new_str.end(), 'l', '4');
+    ReplaceChars(new_str, 'l', '4');
 
-    std::replace(new_str.begin(), new_str.end(), 'm', '5');
-    std::replace(new_str.begin(), new_str.end(), 'n', '5');
+    ReplaceChars(new_str, 'm', '5');
+    ReplaceChars(new_str, 'n', '5');
 
-    std::replace(new_str.begin(), new_str.end(), 'r', '6');
+    ReplaceChars(new_str, 'r', '6');
 
     return new_str;
 }
 
 std::string VowelsDeleter (std::string& new_str, std::string& temp_str) // удаление гласных
 {
-    bool isNeedToSkip = false;
     temp_str = new_str[0];
-    for (int i = 1; i < new_str.length(); i++)
+    int i = 1;
+    while (i < new_str.length())
     {
-        if (isNeedToSkip == true)
-        {
-            isNeedToSkip = false;
-            continue;
-        }
-        if (new_str[i] == 'a' || new_str[i] == 'e' || new_str[i] == 'i' 
+        if (new_str[i] == 'a' || new_str[i] == 'e' || new_str[i] == 'i'
          || new_str[i] == 'o' || new_str[i] == 'u' || new_str[i] == 'y')
         {
-            isNeedToSkip = true;
+            i++; // пропускаем текущую гласную букву
             continue;
         }
         temp_str += new_str[i];
+        i++;
     }
     new_str = temp_str;
     return new_str;
@@ -56,7 +57,7 @@ std::string StrCutter (std::string& new_str)
 {
     if (new_str.length() > 4)
     {
-        new_str.substr(0, 4);
+        new_str = new_str.substr(0, 4);
     }
     else
     {
@@ -111,6 +112,7 @@ std::string EqualsDeleter (std::string& temp_str, std::string& new_str)
 
 std::string StrToCode (const std::string& str) // функция, возвращающая строку
 {
+    assert (str.length() != 0); // проверка, что строка не пустая
     std::string result;
     const char FIRST_LETTER = toupper(str[0]); // запоминаем первую букву
 
@@ -132,22 +134,14 @@ std::string StrToCode (const std::string& str) // функция, возвращ
     // обрезаем до первых четырёх символов и заполняем недостающие символы 0
     new_str = StrCutter (new_str);
 
-    return new_str;
+    return new_str; 
 }
 
-int isSimilar (std::string str1, std::string str2)
+bool isSimilar (std::string str1, std::string str2)
 {
     std::string code1 = StrToCode(str1);
     std::string code2 = StrToCode(str2);
 
-    if (code1 == code2)
-    {
-        printf("The strings are phonetically similar");
-        return 1;
-    }
-    else
-    {
-        printf("The strings are not phonetically similar");
-        return -1;
-    }
+    if (code1 == code2) return true;
+    else                return false;
 }

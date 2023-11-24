@@ -4,12 +4,15 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <assert.h>
+
+void ReplaceChars (std::string& new_str, char from, char to);
 
 std::string Replacer (std::string& new_str);
 
 std::string StrToCode (const std::string& str); // функция, возвращающая строку
 
-int isSimilar (std::string str1, std::string str2);
+bool isSimilar (std::string str1, std::string str2);
 
 std::string VowelsDeleter (std::string& new_str, std::string& temp_str); // удаление гласных
 

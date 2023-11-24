@@ -17,13 +17,30 @@ class TestPhoneticArg : public ::testing::Test
     }
 };
 
-TEST_F(TestPhoneticArg, isSimilar)
+TEST_F (TestPhoneticArg, isSimilar)
 {
     {
         int expected{-1};
         int received = isSimilar("kjbkr", "wt");
         ASSERT_EQ(expected, received);
     }
+}
+
+TEST (TestPhoneticArg, StrToCode)
+{
+    ASSERT_FALSE(StrToCode("").empty());
+}
+
+TEST (TestPhoneticArg, StrCutter)
+{
+    std::string new_str = "hello";
+    StrCutter(new_str);
+    ASSERT_EQ(new_str, "hell");
+}
+
+TEST (TestPhoneticArg, SimilarCode)
+{
+    
 }
 
 int main (int argc, char* argv[])
